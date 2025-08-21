@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { axiosInstance } from "../../utils/axiosInstance";
+import { useAppContext } from "../hooks/useAppContext";
+
+// Assets
 import filter from "../assets/filter.png";
 import homes1 from "../assets/homes1.png";
 import homes2 from "../assets/homes2.png";
@@ -17,7 +21,12 @@ import pin from "../assets/pin.png";
 import like from "../assets/like.png";
 
 const Property = ({ filters }) => {
-  const allProperties = [
+  const { token } = useAppContext();
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Dummy data (for non-logged-in users)
+  const dummyProperties = [
     {
       imgg: homes1,
       title: "Real House Luxury Villa",
@@ -99,21 +108,36 @@ const Property = ({ filters }) => {
       price: "600,000,000",
       availability: "For Sale",
     },
-    {
-      imgg: homes9,
-      title: "Real House Luxury Villa",
-      location: "Ikeja, Lagos",
-      bedrooms: 6,
-      bathrooms: 6,
-      price: "600,000,000",
-      availability: "For Sale",
-    },
   ];
 
+  // Fetch properties if logged in, else use dummy
+  useEffect(() => {
+    const fetchProperties = async () => {
+      if (!token) {
+        setProperties(dummyProperties); // set dummy for guests
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axiosInstance.get("/property", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setProperties(response.data.properties);
+      } catch (error) {
+        console.error("Error fetching properties:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
+  }, [token]);
+
   // Filtering
-  const filtered = allProperties.filter((p) => {
+  const filtered = properties.filter((p) => {
     const matchLocation = filters?.location
-      ? p.location.toLowerCase().includes(filters.location.toLowerCase())
+      ? p.location?.toLowerCase().includes(filters.location.toLowerCase())
       : true;
 
     const matchBedrooms = filters?.bedrooms
@@ -123,9 +147,9 @@ const Property = ({ filters }) => {
     return matchLocation && matchBedrooms;
   });
 
-  // pagination
+  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const propertiesPerPage = 9; // number per page
+  const propertiesPerPage = 9;
   const totalPages = Math.ceil(filtered.length / propertiesPerPage);
 
   const indexOfLast = currentPage * propertiesPerPage;
@@ -136,15 +160,19 @@ const Property = ({ filters }) => {
     setCurrentPage(pageNumber);
   };
 
+  if (loading) {
+    return <p className="text-center mt-10">Loading properties...</p>;
+  }
+
   return (
     <div className="component mt-[40px]">
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center items-start md:justify-between gap-4">
         <div className="flex gap-4 items-center">
           <div className="flex items-center gap-2">
             <img src={filter} alt="filter" />
             <p className="md:text-[21px] text-[18px] font-[400] text-[#181A20]">
-              {" "}
-              More Filter{" "}
+              More Filter
             </p>
           </div>
           <p className="text-[#181A20] font-[400] md:text-[21px] text-[18px]">
@@ -163,12 +191,12 @@ const Property = ({ filters }) => {
         </div>
       </div>
 
-      {/* Properties  */}
+      {/* Properties */}
       <div className="flex flex-wrap gap-8 lg:justify-between items-center justify-center mt-[20px]">
         {currentProperties.length > 0 ? (
           currentProperties.map((property, index) => (
             <div
-              key={index}
+              key={property._id || index}
               className="relative h-[520px] w-[370px] rounded-[9.17px] border-[0.92px] border-[#DDD8D8] bg-[#FFFFFF]"
             >
               <img
@@ -233,7 +261,6 @@ const Property = ({ filters }) => {
           >
             &lt;
           </button>
-          {/* Page Numbers */}
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
             <button
               key={number}
@@ -247,7 +274,6 @@ const Property = ({ filters }) => {
               {number}
             </button>
           ))}
-
           <button
             disabled={currentPage === totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
