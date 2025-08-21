@@ -25,7 +25,6 @@ const Property = ({ filters }) => {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Dummy data (for non-logged-in users)
   const dummyProperties = [
     {
       imgg: homes1,
@@ -108,13 +107,59 @@ const Property = ({ filters }) => {
       price: "600,000,000",
       availability: "For Sale",
     },
+
+    {
+      imgg: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
+      title: "WaterFront Mansion",
+      location: "Banana Island, Lagos",
+      bedrooms: 4,
+      bathrooms: 4,
+      price: "800,000,000",
+      availability: "For Rent",
+    },
+
+    {
+      imgg: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+      title: "Garden Estate",
+      location: "Port Harcourt, Rivers",
+      bedrooms: 3,
+      bathrooms: 5,
+      price: "3,400,000,000",
+      availability: "For Rent",
+    },
+    {
+      imgg: "https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e",
+      title: "Luxury Villa",
+      location: "Ibadan, Oyo",
+      bedrooms: 3,
+      bathrooms: 3,
+      price: "2,850,000,000",
+      availability: "For Sale",
+    },
+    {
+      imgg: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      title: "WaterFront Mansion",
+      location: "Eleko Beach, Lagos",
+      bedrooms: 8,
+      bathrooms: 6,
+      price: "780,000,000",
+      availability: "For Sale",
+    },
+    {
+      imgg: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c",
+      title: "Country Home",
+      location: "Maitama, Abuja",
+      bedrooms: 6,
+      bathrooms: 5,
+      price: "3, 400,000,000",
+      availability: "For Rent",
+    },
   ];
 
-  // Fetch properties if logged in, else use dummy
   useEffect(() => {
     const fetchProperties = async () => {
       if (!token) {
-        setProperties(dummyProperties); // set dummy for guests
+        setProperties(dummyProperties);
         setLoading(false);
         return;
       }
@@ -223,7 +268,7 @@ const Property = ({ filters }) => {
                   </div>
                 </div>
                 <hr className="border-[0.92px] border-[#DDD8D8] my-7" />
-                <div className="flex items-center gap-15">
+                <div className="flex items-center justify-between">
                   <p className="font-[600] text-[#373737] text-[18px] md:text-[22px]">
                     # {property.price}
                   </p>

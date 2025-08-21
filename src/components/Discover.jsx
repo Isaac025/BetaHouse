@@ -57,12 +57,21 @@ const Discover = () => {
     },
     {
       title: "Twin Duplex",
-      price: "₦290,000,000",
+      price: "₦500,000,000",
       bedrooms: 6,
       bathrooms: 3,
       size: "720 sq ft",
       location: "Victoria Island, Lagos",
-      imgg: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      imgg: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750",
+    },
+    {
+      title: "Twin Duplex",
+      price: "₦290,000,000",
+      bedrooms: 5,
+      bathrooms: 4,
+      size: "720 sq ft",
+      location: "Victoria Island, Lagos",
+      imgg: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
     },
   ];
 
