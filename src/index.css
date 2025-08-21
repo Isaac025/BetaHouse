@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.component {
+  @apply max-w-[1240px] mx-auto p-4 w-full;
+}
+
+.nav-links {
+  @apply font-[500] md:text-[14px] lg:text-[20px] text-[#F5F5F5];
+}
+
+.labell {
+  @apply text-[#181A20D1] text-[16px] font-medium block mb-2;
+}
+
+.inputt {
+  @apply w-full px-[12px] py-[15px] h-[50px]  rounded-[5px] outline-none text-[16px] placeholder:text-[#2632388F];
+}

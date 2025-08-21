@@ -1,0 +1,6 @@
+.heropage {
+  background-image: url("./assets/bgimage.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
