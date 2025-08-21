@@ -72,7 +72,7 @@ const Login = () => {
               type="email"
               id="email"
               placeholder="Enter your Email"
-              className="inputt"
+              className="inputt border-[2.5px] border-[#DEDFE0]"
               {...register("email")}
             />
             {errors.email && (
@@ -87,7 +87,7 @@ const Login = () => {
               type="password"
               id="password"
               placeholder="Enter your password"
-              className="inputt"
+              className="inputt border-[2.5px] border-[#DEDFE0]"
               {...register("password")}
             />
             {errors.password && (
