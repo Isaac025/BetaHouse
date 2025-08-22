@@ -279,11 +279,11 @@ const Property = ({ filters }) => {
                   </div>
                 </div>
               </div>
-              <div className="flex items-center justify-around gap-32 absolute top-[10px] left-[25px]">
-                <div className="bg-[#3D9970] text-[#FFFFFF] w-[96px] flex items-center justify-center h-[36px] rounded-[3px] text-[13px] font-[500] ">
+              <div className="flex max-sm:flex-col max-sm:gap-2 md:items-center justify-around gap-32 absolute top-[10px] left-[25px]">
+                <div className="bg-[#3D9970] text-[#FFFFFF] w-[80px] md:w-[96px] flex items-center justify-center h-[36px] rounded-[3px] text-[13px] font-[500] ">
                   <p>Featured</p>
                 </div>
-                <div className="bg-[#D3D3D3B2] text-[#FFFFFF] w-[96px] flex items-center justify-center h-[36px] rounded-[3px] text-[13px] font-[500] ">
+                <div className="bg-[#D3D3D3B2] text-[#FFFFFF] w-[80px] md:w-[96px] flex items-center justify-center h-[36px] rounded-[3px] text-[13px] font-[500] ">
                   <p>{property.availability}</p>
                 </div>
               </div>
@@ -300,7 +300,7 @@ const Property = ({ filters }) => {
           <button
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}
-            className={`px-3 py-1 rounded ${
+            className={`px-3 py-1 cursor-pointer rounded ${
               currentPage === 1 ? "text-gray-400" : "text-black"
             }`}
           >
@@ -310,9 +310,9 @@ const Property = ({ filters }) => {
             <button
               key={number}
               onClick={() => handlePageChange(number)}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1 cursor-pointer rounded ${
                 currentPage === number
-                  ? "bg-[#3D9970] text-white"
+                  ? "bg-[#3D9970]  text-white"
                   : "text-black"
               }`}
             >
@@ -322,7 +322,7 @@ const Property = ({ filters }) => {
           <button
             disabled={currentPage === totalPages}
             onClick={() => handlePageChange(currentPage + 1)}
-            className={`px-3 py-1 rounded ${
+            className={`px-3 py-1 rounded cursor-pointer ${
               currentPage === totalPages ? "text-gray-400" : "text-black"
             }`}
           >

@@ -79,7 +79,7 @@ const Footer = () => {
       </div>
 
       <div className="component mt-10 border-t border-[#6F6F6F] pt-6 flex flex-col md:flex-row gap-4 md:justify-between font-medium text-[15px] text-[#FFFFFF]">
-        <p>Copyright 2025 Betahouse | Designed by Michael.fig</p>
+        <p>Copyright 2025 Betahouse | Designed by Isaac</p>
         <p>Privacy Policy</p>
       </div>
     </footer>
