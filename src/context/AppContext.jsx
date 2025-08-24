@@ -13,7 +13,6 @@ const AppProvider = ({ children }) => {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
-
   }, []);
 
   const login = (accessToken, user) => {
